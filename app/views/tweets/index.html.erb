@@ -1,4 +1,13 @@
 <div class="row">
-  <h1>Tweets#index</h1>
-  <p>Find me in app/views/tweets/index.html.erb</p>
+  <h1>Tweets about "<%= @query %>"</h1>
+
+  <form action="<%= root_path %>" method="get">
+    <%= text_field_tag :query, params[:query], placeholder: @query %>
+    <%= submit_tag "Search", name: nil %>
+  </form>
+
+  <% @tweets.each do |tweet| %>
+    <p><%= tweet["text"] %></p>
+    <p><%= tweet["user"]["screen_name"] %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
+  <% end %>
 </div>
