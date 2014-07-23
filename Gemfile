@@ -38,6 +38,11 @@ gem 'simple_form', '3.1.0.rc1'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 
+group :development, :test do
+  gem 'dotenv-rails'
+  gem 'pry-rails'
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
