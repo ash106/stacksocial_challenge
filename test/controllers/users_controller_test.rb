@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   
   test 'get index is successful' do
+    session[:user_id] = users(:alex).id
     get :index
     assert_includes assigns(:users), users(:alex)
     assert_response :success
