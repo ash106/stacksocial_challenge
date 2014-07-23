@@ -43,6 +43,9 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+gem 'dalli'
+gem 'memcachier'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
