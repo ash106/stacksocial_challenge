@@ -20,7 +20,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_difference 'User.count' do
       post :create, user: user_params
     end
-    assert_redirected_to users_path
+    assert_redirected_to root_path
   end
 
   test 'post create is unsuccessful with invalid attributes' do
