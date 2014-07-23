@@ -24,5 +24,12 @@ module ApplicationHelper
       results["errors"]
     end
   end
+
+  def tweetify(content)
+    content.gsub!(/@[a-z0-9_]+/i) { |username| link_to(username, show_tweeter_path(username: username.tr('@',''))) }
+    content.gsub!(/#[a-z0-9_]+/i) { |hashtag| link_to(hashtag, root_path(query: hashtag)) }
+    content.gsub!(URI.regexp(['http','https'])) { |url| link_to(url, url) }
+    raw(content)
+  end
   
 end

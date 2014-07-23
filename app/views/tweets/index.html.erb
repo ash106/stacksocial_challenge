@@ -7,7 +7,7 @@
   </form>
 
   <% @tweets.each do |tweet| %>
-    <p><%= tweet["text"] %></p>
+    <p><%= tweetify(tweet["text"]) %></p>
     <p><%= tweet["user"]["screen_name"] %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
   <% end %>
 </div>
