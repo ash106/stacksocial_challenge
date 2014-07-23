@@ -1,0 +1,12 @@
+<div class="row">
+  <h1><%= @username %></h1>
+  
+  <% if @tweets.is_a?(Hash) %>
+    <p><%= @tweets["error"] %></p>
+  <% else %>
+    <%= image_tag @user_image %>
+    <% @tweets.each do |tweet| %>
+      <p><%= tweet["text"] %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
+    <% end %>
+  <% end %>
+</div>

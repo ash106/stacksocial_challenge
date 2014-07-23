@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'tweets#index'
 
+  get 'tweeters/:username', to: 'tweeters#show', as: :show_tweeter
+
   resources :users, only: [:index, :new, :create]
   resource :session, only: [:new, :create, :destroy]
 
