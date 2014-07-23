@@ -10,8 +10,8 @@ class TweetersController < ApplicationController
     request = Net::HTTP::Get.new("/1.1/statuses/user_timeline.json?screen_name=#{@username}&count=20")   
     request["Authorization"] = "Bearer #{ENV['BEARER_TOKEN']}"
     
-    Rails.cache.fetch("/tweeters/#{@username}", expires_in: 5.minutes) do  
-      response = https.request(request)
+    response = Rails.cache.fetch("/tweeters/#{@username}", expires_in: 5.minutes) do  
+      https.request(request)
     end
 
     @tweets = JSON.parse(response.body)
