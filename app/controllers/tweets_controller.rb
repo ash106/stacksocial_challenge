@@ -13,10 +13,10 @@ class TweetsController < ApplicationController
       URI::encode(['stacksocial', 'ruby on rails', 'tenderlove', 'railscasts'].sample)
     end
 
-    Rails.cache.fetch("#{@query}", expires_in: 5.minutes) do
-      request = Net::HTTP::Get.new("/1.1/search/tweets.json?q=#{@query}&count=20&result_type=recent")   
-      request["Authorization"] = "Bearer #{ENV['BEARER_TOKEN']}"
-      
+    request = Net::HTTP::Get.new("/1.1/search/tweets.json?q=#{@query}&count=20&result_type=recent")   
+    request["Authorization"] = "Bearer #{ENV['BEARER_TOKEN']}"
+    
+    Rails.cache.fetch("#{@query}", expires_in: 5.minutes) do      
       response = https.request(request)
     end
 

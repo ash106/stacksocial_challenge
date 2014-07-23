@@ -7,10 +7,10 @@ class TweetersController < ApplicationController
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
 
-    Rails.cache.fetch("/tweeters/#{@username}", expires_in: 5.minutes) do
-      request = Net::HTTP::Get.new("/1.1/statuses/user_timeline.json?screen_name=#{@username}&count=20")   
-      request["Authorization"] = "Bearer #{ENV['BEARER_TOKEN']}"
-      
+    request = Net::HTTP::Get.new("/1.1/statuses/user_timeline.json?screen_name=#{@username}&count=20")   
+    request["Authorization"] = "Bearer #{ENV['BEARER_TOKEN']}"
+    
+    Rails.cache.fetch("/tweeters/#{@username}", expires_in: 5.minutes) do  
       response = https.request(request)
     end
 
