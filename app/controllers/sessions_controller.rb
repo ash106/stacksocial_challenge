@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate(params[:email], params[:password])
+    if user = User.authenticate(params[:session][:email], params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome back, #{user.email}!"
       redirect_to session[:intended_url] || root_path

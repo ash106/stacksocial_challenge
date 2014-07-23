@@ -1,11 +1,14 @@
-<h1>Sign In</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center">Sign In</h1>
 
-<%= form_tag(session_path) do %>
-  <%= label_tag :email %>
-  <%= email_field_tag :email, nil, autofocus: true %>
-
-  <%= label_tag :password %>
-  <%= password_field_tag :password, nil %>
-
-  <%= submit_tag 'Sign In' %>
-<% end %>
+    <%= simple_form_for :session, url: '/session', html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :email, autofocus: true %>
+      <%= f.input :password %>
+      <div class="text-center">
+        <%= f.button :submit, 'Sign In' %>
+      </div>
+    <% end %>
+  </div>
+</div>
