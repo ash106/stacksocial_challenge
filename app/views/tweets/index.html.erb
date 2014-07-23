@@ -8,6 +8,6 @@
 
   <% @tweets.each do |tweet| %>
     <p><%= tweetify(tweet["text"]) %></p>
-    <p><%= tweet["user"]["screen_name"] %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
+    <p><%= link_to tweet["user"]["screen_name"], show_tweeter_path(username: tweet["user"]["screen_name"]) %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
   <% end %>
 </div>
