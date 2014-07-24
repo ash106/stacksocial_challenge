@@ -1,12 +1,24 @@
-<div class="row">
-  <h1><%= @username %></h1>
-
-  <% if @tweets.is_a?(Hash) %>
-    <p><%= @tweets["error"] %></p>
-  <% else %>
-    <%= image_tag @user_image %>
-    <% @tweets.each do |tweet| %>
-      <p><%= tweetify(tweet["text"]) %> - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
+<div id="tweeters_show" class="row">
+  <div class="col-md-4">
+    <% if @tweets.is_a?(Hash) %>
+      <p><%= @tweets["error"] %></p>
+    <% else %>
+      <p><%= image_tag @user_image %></p>
     <% end %>
-  <% end %>
+    <h1><%= @username %></h1>
+  </div>
+  <div id="tweeters_show_list" class="col-md-8">
+    <% if @tweets.is_a?(Array) %>
+      <% @tweets.each do |tweet| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= tweetify(tweet["text"]) %>
+          </div>
+          <div class="panel-footer">
+            <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

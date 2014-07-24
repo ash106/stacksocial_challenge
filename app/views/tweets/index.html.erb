@@ -1,17 +1,30 @@
 <div class="row">
-  <h1>Tweets about "<%= @query %>"</h1>
+  <h1 class="text-center">Tweets about "<%= @query %>"</h1>
 
-  <form action="<%= root_path %>" method="get">
-    <%= text_field_tag :query, params[:query], placeholder: @query %>
-    <%= submit_tag "Search", name: nil %>
-  </form>
   
-  <div id="tweets_list">
-    <% @tweets.each do |tweet| %>
-      <p><%= tweetify(tweet["text"]) %></p>
-      <p><%= image_tag tweet["user"]["profile_image_url_https"] %>
-         <%= link_to tweet["user"]["screen_name"], show_tweeter_path(username: tweet["user"]["screen_name"]), data: { toggle: "tooltip" }, title: "#{tweet["user"]["followers_count"]} followers<br />#{tweet["user"]["friends_count"]} friends<br />#{tweet["user"]["statuses_count"]} tweets<br />#{tweet["user"]["location"]}" %> 
-         - <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago</p>
-    <% end %>
+  <div class="col-md-9">
+    <div id="tweets_list">
+      <% @tweets.each do |tweet| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= tweetify(tweet["text"]) %>
+          </div>
+          <div class="panel-footer">
+            <%= image_tag tweet["user"]["profile_image_url_https"] %>
+            <%= link_to tweet["user"]["screen_name"], show_tweeter_path(username: tweet["user"]["screen_name"]), data: { toggle: "tooltip" }, title: "#{tweet["user"]["followers_count"]} followers<br />#{tweet["user"]["friends_count"]} friends<br />#{tweet["user"]["statuses_count"]} tweets<br />#{tweet["user"]["location"]}", class: 'tweeter_name' %> 
+            <%= time_ago_in_words(Time.strptime(tweet["created_at"], '%a %b %d %H:%M:%S %z %Y')) %> ago
+           </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <form action="<%= root_path %>" method="get" class="form-horizontal">
+      <div class="form-group">
+        <%= text_field_tag :query, params[:query], placeholder: @query %>
+        <%= submit_tag "Search", name: nil, class: 'btn btn-primary btn-sm' %>
+      </div>
+    </form>
   </div>
 </div>
